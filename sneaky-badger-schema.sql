@@ -1,0 +1,15 @@
+CREATE TABLE dens ( 
+    id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    built_at TIMESTAMP NOT NULL
+);
+
+CREATE TABLE badgers (
+    id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE CHECK (POSITION('@' IN email) > 1),
+    birth TIMESTAMP NOT NULL,
+    den_id INTEGER NOT NULL,
+    FOREIGN KEY (den_id) REFERENCES dens(id) ON DELETE CASCADE
+);
+
